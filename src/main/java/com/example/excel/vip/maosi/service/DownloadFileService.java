@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
 
 /**
  * @Author Maosi
@@ -32,7 +33,13 @@ public class DownloadFileService {
         response.setContentType("application/octet-stream");
         response.setCharacterEncoding("utf-8");
         response.setContentLength((int) file.length());
-        response.setHeader("Content-Disposition", "attachment;filename=" + fileName );
+        try {
+            //处理文件中的特殊符号
+            response.setHeader("Content-disposition", "attachment; filename="+ new String(URLEncoder.encode(fileName,"utf-8").getBytes("UTF-8"), "ISO-8859-1") + ".xls");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+//        response.setHeader("Content-Disposition", "attachment;filename=" + fileName );
 
         try(BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))) {
             byte[] buff = new byte[1024];
