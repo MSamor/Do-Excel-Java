@@ -1,0 +1,43 @@
+logging:
+  level:
+    root: INFO
+  file:
+    #日志名称
+    name: excel.log
+    #存储的路径
+#    path: /var/log/
+  logback:
+    rollingpolicy:
+      #存储的最大值
+      max-file-size: 50MB
+      #保存时间
+      max-history: 7
+
+
+spring:
+  servlet:
+    multipart:
+      # 文件的最大请求大小
+      max-request-size: 10MB
+      max-file-size: 10MB
+
+#  web:
+#    resources:
+#      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
+
+upload:
+  path: F:/fileTest
+  endWiths:
+    - xls
+    - xlsx
+
+download:
+  path: F:/fileTest
+
+
+write:
+  excel:
+    path: F:/fileTest
+  pdf:
+    path: F:/fileTest
+
